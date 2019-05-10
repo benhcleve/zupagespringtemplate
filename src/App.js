@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import zupage from "zupage";
+import BlogCarousel from "./components/Carousel";
+import "./App.css";
+import grass from "./templategrass.png";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export default class App extends Component {
+  state = {
+    post: {}
+  };
+
+  async componentDidMount() {
+    const response = await zupage.getCurrentPost();
+
+    this.setState({
+      post: response
+    });
+
+    console.log("state props... \n", this.state);
+  }
+
+  render() {
+    return (
+      <div className="body">
+        <h1 className="container">{this.state.post.title}</h1>
+
+        <div className="carousel">
+          <BlogCarousel images={this.state.post.images || []} />
+        </div>
+
+        <br />
+        <div className="container postbody">
+          <p>{this.state.post.body}</p>
+        </div>
+        <img className="footer" src={grass} alt="grass" />
+      </div>
+    );
+  }
 }
-
-export default App;
