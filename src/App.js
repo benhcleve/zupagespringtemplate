@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import zupage from "zupage";
 import BlogCarousel from "./components/Carousel";
 import "./App.css";
-import grass from "./templategrass.png";
+import bubbles from "./templatebubbles.png";
 
 export default class App extends Component {
   state = {
@@ -32,7 +32,7 @@ export default class App extends Component {
         <div className="container postbody">
           <p>{this.state.post.body}</p>
         </div>
-        <img className="footer" src={grass} alt="grass" />
+        <img className="footer" src={bubbles} alt="grass" />
       </div>
     );
   }
